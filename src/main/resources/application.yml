@@ -1,0 +1,17 @@
+server:
+  port: 8080
+spring:
+  datasource:
+    test1:
+      username: root
+      password: root
+      url: jdbc:mysql://127.0.0.1:3306/test?useServerPrepStmts=false&useUnicode=true&characterEncoding=gbk
+      driver-class-name: com.mysql.jdbc.Driver
+      jdbc-url: jdbc:mysql://127.0.0.1:3306/test?useServerPrepStmts=false&useUnicode=true&characterEncoding=gbk
+
+    test2:
+      username: root
+      password: root
+      url: jdbc:mysql://127.0.0.1:3306/world?useServerPrepStmts=false&useUnicode=true&characterEncoding=gbk
+      driver-class-name: com.mysql.jdbc.Driver
+      jdbc-url: jdbc:mysql://127.0.0.1:3306/world?useServerPrepStmts=false&useUnicode=true&characterEncoding=gbk

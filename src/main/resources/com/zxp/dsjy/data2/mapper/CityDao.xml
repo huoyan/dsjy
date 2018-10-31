@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zxp.dsjy.data2.mapper.CityDao">
+
+    <sql id="baseColumns">
+        id,
+        name
+    </sql>
+
+    <insert id="add" parameterType="com.zxp.dsjy.data2.entity.City">
+        insert into city(
+        name
+        )
+        value (
+        #{name}
+
+        )
+        <selectKey keyColumn="id" keyProperty="id" resultType="long">
+            select last_insert_id() as id
+        </selectKey>
+    </insert>
+
+
+    <delete id="deleteById" parameterType="long">
+        delete from city where id=#{id}
+    </delete>
+
+    <update id="updateById" parameterType="com.zxp.dsjy.data2.entity.City">
+        update city
+        set
+        <if test="name!=null">
+            name=#{name},
+        </if>
+
+        where id=#{id}
+    </update>
+
+    <select id="findById" parameterType="long" resultType="com.zxp.dsjy.data2.entity.City">
+        select
+        <include refid="baseColumns"/>
+        from city
+        where id=#{id}
+    </select>
+
+    <select id="findAll" resultType="com.zxp.dsjy.data2.entity.City" parameterType="map">
+        select
+        <include refid="baseColumns"/>
+        from city v
+        <if test="name!=null">
+            WHERE v.name like concat('%', #{ name}, '%')
+        </if>
+
+    </select>
+
+    <select id="count" resultType="long">
+        select count(*) from city v
+        <if test="name!=null">
+            WHERE v.name like concat('%', #{ name}, '%')
+        </if>
+    </select>
+    <select id="findBySortOrder" parameterType="long" resultType="com.zxp.dsjy.data2.entity.City">
+        select
+        <include refid="baseColumns"/>
+        from city
+        where `sort_order`=#{sortOrder}
+    </select>
+    <select id="maxSortOrder" resultType="long">
+       select ifnull(max(sort_order), 0) as sortOrder
+        from city
+    </select>
+</mapper>
